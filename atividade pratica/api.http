@@ -1,0 +1,103 @@
+@JWT = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzgyMzAwNTQ2LCJpYXQiOjE3ODIzMDAyNDYsImp0aSI6IjliZTU3ZjRkYjgwNjRhYTFiMGQ1MWUyYzU0ZWM5NmI5IiwidXNlcl9pZCI6IjQiLCJ0aXBvIjoiT1JHQU5JWkFET1IiLCJ1c2VybmFtZSI6Im9yZ19jaXJjdWl0byJ9.ejce-5jW5OkAaUp_hJkDaW5QBJV0hjOSJ4T1dB956Aw
+
+### 1) Cadastrar um atleta
+POST http://localhost:8000/api/signup/
+Content-Type: application/json
+
+{
+  "username": "pedro_corredor",
+  "email": "pedro@runtrack.com",
+  "password": "Trilha@123",
+  "tipo": "ATLETA",
+  "cidade": "Natal"
+}
+
+### login atleta
+POST http://localhost:8000/api/login/
+Content-Type: application/json
+
+{
+  "username": "pedro_corredor",
+  "password": "Trilha@123"
+}
+
+### 2) Cadastrar um treinador
+POST http://localhost:8000/api/signup/
+Content-Type: application/json
+
+{
+  "username": "coach_ana",
+  "email": "ana@runtrack.com",
+  "password": "Coach@456",
+  "tipo": "TREINADOR",
+  "cidade": "Mossoró"
+}
+
+### 3) Cadastrar um organizador
+POST http://localhost:8000/api/signup/
+Content-Type: application/json
+
+{
+  "username": "org_circuito",
+  "email": "circuito@runtrack.com",
+  "password": "Org@789",
+  "tipo": "ORGANIZADOR"
+}
+
+### 4) Login do atleta
+POST http://localhost:8000/api/login/
+Content-Type: application/json
+
+{
+  "username": "pedro_corredor",
+  "password": "Trilha@123"
+}
+
+### 5) Perfil do atleta
+GET http://localhost:8000/api/perfil/
+Authorization: Bearer {{ JWT }}
+
+### 6) Atleta registra treino
+POST http://localhost:8000/api/treino/
+Authorization: Bearer {{ JWT }}
+Content-Type: application/json
+
+{
+  "distancia_km": 10,
+  "tempo_min": 58
+}
+
+### 7) Atleta tenta criar evento — deve dar 403
+POST http://localhost:8000/api/evento/
+Authorization: Bearer {{ JWT }}
+Content-Type: application/json
+
+{
+  "nome": "Corrida do Atleta"
+}
+
+### 8) Login do organizador
+POST http://localhost:8000/api/login/
+Content-Type: application/json
+
+{
+  "username": "org_circuito",
+  "password": "Org@789"
+}
+
+### 9) Organizador cria evento
+POST http://localhost:8000/api/evento/
+Authorization: Bearer {{ JWT }}
+Content-Type: application/json
+
+{
+  "nome": "Circuito das Dunas 2025"
+}
+
+### 10) Renovar token
+POST http://localhost:8000/api/refresh/
+Content-Type: application/json
+
+{
+  "refresh": "COLE_AQUI_O_REFRESH_TOKEN"
+}
